@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const ButtonVote = ({onClick, maxVotesIdx}) => <button onClick={onClick}>vote</button>
+const ButtonVote = ({onClick}) => <button onClick={onClick}>vote</button>
 
 const Button = ({onClick, text}) => {
   return (
