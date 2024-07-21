@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
+import PhonebookService from './services/PhonebookService'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
-
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchItem, setSearchItem] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => setPersons([...response.data]))
-  }, [])
+      PhonebookService
+        .getAll()
+        .then(initialContacts => setPersons(initialContacts))
+        .catch(error => alert("An error occured while saving to server..."))
+    }, [])
 
   const results = persons.filter((x) => {
       x = x.name.toLowerCase()
