@@ -1,6 +1,6 @@
 import PhonebookService from "../services/PhonebookService"
 
-const PersonForm = ({newName, persons, newNumber, setNewName, setNewNumber, setPersons}) => {
+const PersonForm = ({newName, persons, newNumber, setNewName, setNewNumber, setPersons, setSuccessMsg}) => {
   const addName = (event) => {
     event.preventDefault()
 
@@ -33,6 +33,11 @@ const PersonForm = ({newName, persons, newNumber, setNewName, setNewNumber, setP
       .then((newContact) => {
         setNewNumber('')
         setPersons(persons.concat(newContact))
+        setSuccessMsg(`Added ${name}`)
+
+        setTimeout(() => {
+          setSuccessMsg(null)
+        }, 5000)
       })
     }
   }

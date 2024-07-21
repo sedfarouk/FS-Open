@@ -7,7 +7,7 @@ const getAll = () => axios.get(baseUrl).then(response => response.data)
 const create = newObject => axios.post(baseUrl, newObject)
                 .then(response => response.data)
 
-const update = (id, existingObject) => axios.put(`${baseUrl}/${id}`)
+const update = (id, existingObject) => axios.put(`${baseUrl}/${id}`, existingObject)
                 .then(response => response.data)
 
 const remove = id => axios.delete(`${baseUrl}/${id}`)
