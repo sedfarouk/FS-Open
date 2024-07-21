@@ -2,13 +2,7 @@ import { useState } from 'react'
 
 const ButtonVote = ({onClick}) => <button onClick={onClick}>vote</button>
 
-const Button = ({onClick, text}) => {
-  return (
-    <button onClick={onClick}>
-      {text}
-    </button>
-  )
-}
+const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
 const App = () => {
   const anecdotes = [
@@ -42,7 +36,6 @@ const App = () => {
           copyVotes[selected] += 1
           
           setVotes(copyVotes)
-
           setMaxVotesIdx(copyVotes.indexOf(Math.max(...copyVotes)))
         }}
       />
