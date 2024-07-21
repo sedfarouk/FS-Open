@@ -9,6 +9,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchItem, setSearchItem] = useState('')
+  const [filteredPersons, setFilteredPersons] = useState([]) 
 
   useEffect(() => {
       PhonebookService
@@ -17,10 +18,13 @@ const App = () => {
         .catch(error => alert("An error occured while saving to server..."))
     }, [])
 
-  const results = persons.filter((x) => {
+  useEffect(() => {
+    const results = persons.filter((x) => {
       x = x.name.toLowerCase()
       return x.includes(searchItem)
     })
+    setFilteredPersons(results)
+  }, [searchItem, persons])
 
   return (
     <div>
@@ -41,7 +45,7 @@ const App = () => {
       />
       
       <h3>Numbers</h3>
-      < Persons results={results} />
+      < Persons filteredPersons={filteredPersons} persons={persons} setPersons={setPersons} />
       
     </div>
   )
