@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -12,25 +15,6 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [searchItem, setSearchItem] = useState('')
 
-  const addName = (event) => {
-    event.preventDefault()
-    const input = newName
-    setNewName('')
-
-    if (persons.find(x => x.name===input))
-      alert(`${input} already added to phonebook`)
-
-    else{
-      const nameObject = {
-        name: input,
-        number: newNumber
-      }
-
-      setNewNumber('')
-      setPersons(persons.concat(nameObject))
-    } 
-  }
-
   const results = persons.filter((x) => {
       x = x.name.toLowerCase()
       return x.includes(searchItem)
@@ -39,26 +23,24 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with <input value={searchItem} onChange={(e) => setSearchItem(e.target.value)} />
-      </div>
+      <Filter 
+        searchItem={searchItem}
+        setSearchItem={setSearchItem}
+      />
 
-      <h2>add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={(e) => setNewName(e.target.value)}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={(e) => setNewNumber(e.target.value)}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-        {results.map(x => <li key={x.name}>{x.name} - {x.number}</li>)}
-      </ul>
+      <h3>Add a new</h3>
+      < PersonForm
+        newName={newName}
+        newNumber={newNumber}
+        persons={persons}
+        setNewName={setNewName}
+        setPersons={setPersons}
+        setNewNumber={setNewNumber}
+      />
+      
+      <h3>Numbers</h3>
+      < Persons results={results} />
+      
     </div>
   )
 }
