@@ -20,7 +20,6 @@ const PersonForm = ({newName, persons, newNumber, setNewName, setNewNumber, setP
         PhonebookService
           .update(updatedObject.id, updatedObject)
           .then(() => setPersons(persons.map(x => x.id!==updatedObject.id ? x : updatedObject)))
-          .catch(alert("An error occured!"))
       }
     }
 

@@ -12,6 +12,7 @@ const App = () => {
   const [searchItem, setSearchItem] = useState('')
   const [filteredPersons, setFilteredPersons] = useState([]) 
   const [successMsg, setSuccessMsg] = useState(null)
+  const [errorMsg, setErrorMsg] = useState(null)
 
   useEffect(() => {
       PhonebookService
@@ -32,7 +33,8 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      < Notification message={successMsg} />
+      < Notification.SuccessNotification message={successMsg} />
+      < Notification.ErrorNotification message={errorMsg} />
 
       <Filter 
         searchItem={searchItem}
@@ -51,8 +53,12 @@ const App = () => {
       />
       
       <h3>Numbers</h3>
-      < Persons filteredPersons={filteredPersons} persons={persons} setPersons={setPersons} />
-      
+      < Persons 
+        filteredPersons={filteredPersons} 
+        persons={persons} 
+        setPersons={setPersons} 
+        setErrorMsg={setErrorMsg} 
+      />      
     </div>
   )
 }
