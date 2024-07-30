@@ -6,8 +6,8 @@ const Display = ({ country }) => {
 
     useEffect(() => {
             async function fetchWeatherData() {
-            const data = await WeatherService.getWeather(`https://api.openweathermap.org/data/2.5/weather?q=${country.name.common}&appid=53a72237d195d4090878ca191daf96fd&units=metric`)
-            setWeather(data)
+                const data = await WeatherService.getWeather(`https://api.openweathermap.org/data/2.5/weather?q=${country.name.common}&appid=${import.meta.env.VITE_WEATHER_API_KEY}&units=metric`)
+                setWeather(data)
         }
     fetchWeatherData()
     }, [country])
