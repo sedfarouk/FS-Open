@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Filter from './components/Filter'
 import Countries from './components/Countries'
 
 const App = () => {
@@ -11,11 +12,9 @@ const App = () => {
       .then((response) => setCountries(response.data.filter(x => x.name.common.toLowerCase().includes(searchTerm))))
   }, [searchTerm])
 
-  const handleChange = (event) => setSearchTerm(event.target.value)
-
   return (
     <div>
-      find countries <input type="text" onChange={handleChange}/>
+      < Filter setSearchTerm={setSearchTerm} />
       < Countries countries={countries} />
     </div>
   )

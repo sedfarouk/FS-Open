@@ -1,25 +1,28 @@
-const Countries = ({ countries }) => {
+import { useState } from "react"
+import Display from "./Display"
+
+const Countries = ({ countries }) => { 
+    const [selected, setSelected] = useState(null)
+
     if (countries.length > 11)
         return <p>Too many matches, specify another filter</p>
 
-    else if (countries.length===1){
-        const country = countries[0]
-        console.log(country.languages)
-        return (
-            <>
-                <h3>{country.name.common}</h3>
+    else if (countries.length===1)
+        return < Display country={countries[0]} />
 
-                <p>capital {country.capital}</p>
-                <p>area {country.area}</p>
-                <h4>languages:</h4>
-
-                <ul>{Object.values(country.languages).map(lang => <li key={lang}>{lang}</li>)}</ul>
-                <img src={country.flags.png} alt="" />
-            </>
-        )
-    }
-
-    return countries.map(x => <p key={x.name.common}>{x.name.common}</p>)
+    return (
+        <>
+            {countries.map(x => 
+                <div key={x.name.common}>
+                    <p>
+                        {x.name.common} 
+                        <button onClick={() => setSelected(x)}>show</button>
+                    </p>
+                    {selected===x && < Display country={x} /> }
+                </div>
+            )}
+        </>
+    )
 }
 
 export default Countries
